@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İyi Ki Doğdun Nur!</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- html2canvas: Story kartını resim olarak indirmek için kütüphane -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --bg-color: #0d0a12;
@@ -27,6 +29,41 @@
             color: var(--text-color);
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
+        }
+
+        /* Müzik Butonu (Floating Widget) */
+        .music-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1500;
+            background: rgba(22, 16, 36, 0.9);
+            border: 1px solid var(--primary-purple);
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+            padding: 10px 18px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease;
+        }
+
+        .music-widget:hover {
+            transform: scale(1.05);
+        }
+
+        .music-icon {
+            color: var(--light-purple);
+            font-size: 1.2rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        #musicText {
+            font-size: 0.85rem;
+            color: var(--glow-purple);
+            font-weight: 500;
         }
 
         /* Navbar */
@@ -119,7 +156,7 @@
 
         .main-photo-container {
             flex: 1;
-            min-width: 300px;
+            min-width: 280px;
             text-align: center;
         }
 
@@ -132,17 +169,12 @@
             border: 2px solid var(--primary-purple);
             box-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
             cursor: pointer;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .main-photo-container img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 45px rgba(199, 125, 255, 0.8);
+            transition: transform 0.4s ease;
         }
 
         .bio-container {
             flex: 1;
-            min-width: 300px;
+            min-width: 280px;
         }
 
         .bio-container h2 {
@@ -160,7 +192,7 @@
             font-size: 1.1rem;
         }
 
-        /* Fotoğraf Galerisi (3 Ek Resim) */
+        /* Fotoğraf Galerisi */
         .gallery-section {
             padding: 3rem 2rem 5rem 2rem;
             max-width: 1100px;
@@ -186,14 +218,8 @@
             overflow: hidden;
             border: 1px solid rgba(157, 78, 221, 0.3);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease;
             cursor: pointer;
-        }
-
-        .gallery-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--light-purple);
-            box-shadow: 0 10px 25px rgba(157, 78, 221, 0.4);
         }
 
         .gallery-card img {
@@ -210,51 +236,109 @@
             font-weight: 600;
         }
 
-        /* Modal (Büyük Fotoğraf Önizleme) */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            top: 0;
-            left: 0;
+        /* 9:16 STORY BÖLÜMÜ */
+        .story-section {
+            padding: 4rem 1rem;
+            background: var(--card-bg);
+            text-align: center;
+            border-top: 1px solid rgba(157, 78, 221, 0.2);
+            border-bottom: 1px solid rgba(157, 78, 221, 0.2);
+        }
+
+        .story-section h2 {
+            font-size: 2.2rem;
+            color: var(--light-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .story-section p {
+            color: #b8b0d0;
+            margin-bottom: 2rem;
+        }
+
+        .story-card-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Tam 9:16 Story Kartı Frame */
+        .story-card {
+            width: 360px;
+            height: 640px; /* 9:16 Oranı */
+            background: linear-gradient(180deg, #1c1333 0%, #0d0a12 100%);
+            border: 3px solid var(--primary-purple);
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-header {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--glow-purple);
+            text-shadow: 0 0 10px var(--primary-purple);
+        }
+
+        .story-img-container {
+            width: 250px;
+            height: 320px;
+            border-radius: 16px;
+            border: 2px solid var(--light-purple);
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(199, 125, 255, 0.5);
+        }
+
+        .story-img-container img {
             width: 100%;
             height: 100%;
-            background-color: rgba(13, 10, 18, 0.95);
-            backdrop-filter: blur(8px);
-            justify-content: center;
-            align-items: center;
+            object-fit: cover;
         }
 
-        .modal-content {
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 15px;
-            border: 2px solid var(--primary-purple);
-            box-shadow: 0 0 30px var(--primary-purple);
+        .story-footer {
+            text-align: center;
         }
 
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: var(--glow-purple);
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-btn:hover {
+        .story-footer h3 {
+            font-size: 1.3rem;
             color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .story-footer p {
+            font-size: 0.85rem;
+            color: var(--glow-purple);
+            margin-bottom: 0;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, var(--primary-purple), var(--light-purple));
+            color: #fff;
+            border: none;
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
         }
 
         /* Sayaç Bölümü */
         .counter-section {
-            background: var(--card-bg);
             padding: 4rem 2rem;
             text-align: center;
-            border-top: 1px solid rgba(157, 78, 221, 0.2);
-            border-bottom: 1px solid rgba(157, 78, 221, 0.2);
         }
 
         .counter-section h2 {
@@ -270,7 +354,7 @@
         }
 
         .timer-box {
-            background: rgba(13, 10, 18, 0.6);
+            background: var(--card-bg);
             border: 1px solid var(--primary-purple);
             padding: 1.5rem;
             border-radius: 12px;
@@ -285,51 +369,6 @@
             color: var(--light-purple);
         }
 
-        /* Dilek/Not Kartları */
-        .wishes-section {
-            padding: 5rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .wishes-section h2 {
-            font-size: 2.5rem;
-            color: var(--light-purple);
-            margin-bottom: 3rem;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(157, 78, 221, 0.3);
-            text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(157, 78, 221, 0.3);
-        }
-
-        .card h3 {
-            color: var(--glow-purple);
-            margin-bottom: 0.8rem;
-        }
-
-        .card p {
-            color: #b8b0d0;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
         /* Footer */
         footer {
             text-align: center;
@@ -340,7 +379,14 @@
             border-top: 1px solid rgba(157, 78, 221, 0.1);
         }
 
-        /* Animasyonlar */
+        /* Gizli YouTube İframe Alanı */
+        #youtubePlayer {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            visibility: hidden;
+        }
+
         @keyframes pulse {
             0% { box-shadow: 0 0 15px rgba(157, 78, 221, 0.4); }
             50% { box-shadow: 0 0 25px rgba(199, 125, 255, 0.8); }
@@ -354,22 +400,29 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.8rem; }
-            .nav-links { gap: 1rem; font-size: 0.85rem; }
-            .gallery-card img { height: 260px; }
+            .nav-links { gap: 0.8rem; font-size: 0.8rem; }
+            .story-card { width: 300px; height: 533px; padding: 1.5rem 1rem; }
+            .story-img-container { width: 210px; height: 270px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Müzik Kontrol Widget -->
+    <div class="music-widget" id="musicButton">
+        <span class="music-icon">♫</span>
+        <span id="musicText">Müzik Yükleniyor...</span>
+    </div>
 
     <!-- Navigasyon Menüsü -->
     <nav>
         <div class="logo">Nur</div>
         <ul class="nav-links">
             <li><a href="#home">Ana Sayfa</a></li>
-            <li><a href="#about">Nur Hakkında</a></li>
+            <li><a href="#about">Hakkında</a></li>
             <li><a href="#gallery">Anılar</a></li>
-            <li><a href="#counter">Zaman Yolculuğu</a></li>
-            <li><a href="#wishes">Dilekler</a></li>
+            <li><a href="#story">Story Kartı</a></li>
+            <li><a href="#counter">Zaman</a></li>
         </ul>
     </nav>
 
@@ -385,7 +438,7 @@
     <!-- Hakkında ve Ana Fotoğraf -->
     <section id="about" class="about-section">
         <div class="main-photo-container">
-            <img src="resim1.jpg" alt="Nur Ana Fotoğraf" onclick="openModal(this.src)">
+            <img src="resim1.jpg" alt="Nur Ana Fotoğraf">
         </div>
         <div class="bio-container">
             <h2>İyi Ki Var Olan Biri</h2>
@@ -395,7 +448,7 @@
             </p>
             <br>
             <p>
-                Bu özel alan, senin ne kadar değerli ve benzersiz olduğunu bir kez daha hatırlatmak için hazırlandı. Yeni yaşında tüm dileklerinin gerçek olması dileğiyle!
+                Bu özel alan, senin ne kadar değerli ve benzersiz olduğunu bir kez daha hatırlatmak için hazırlandı.
             </p>
         </div>
     </section>
@@ -404,18 +457,40 @@
     <section id="gallery" class="gallery-section">
         <h2>Özel Anlar</h2>
         <div class="gallery-grid">
-            <div class="gallery-card" onclick="openModal('resim2.jpg')">
-                <img src="resim2.jpg" alt="Nur Anı 1">
+            <div class="gallery-card">
+                <img src="resim2.jpg" alt="Anı 1">
                 <div class="caption">Işıltılı Gülüşler ✨</div>
             </div>
-            <div class="gallery-card" onclick="openModal('resim3.jpg')">
-                <img src="resim3.jpg" alt="Nur Anı 2">
+            <div class="gallery-card">
+                <img src="resim3.jpg" alt="Anı 2">
                 <div class="caption">Unutulmaz Kareler 💜</div>
             </div>
-            <div class="gallery-card" onclick="openModal('resim4.jpg')">
-                <img src="resim4.jpg" alt="Nur Anı 3">
+            <div class="gallery-card">
+                <img src="resim4.jpg" alt="Anı 3">
                 <div class="caption">En Güzel Hatıralar 🌟</div>
             </div>
+        </div>
+    </section>
+
+    <!-- 9:16 INSTAGRAM / TIKTOK STORY ÇEKME BÖLÜMÜ -->
+    <section id="story" class="story-section">
+        <h2>Instagram Story Alanı</h2>
+        <p>Aşağıdaki kartı doğrudan telefonuna resim olarak indirip Story atabilirsin!</p>
+        
+        <div class="story-card-wrapper">
+            <!-- İndirilecek 9:16 Alanı -->
+            <div class="story-card" id="storyCard">
+                <div class="story-header">Nur</div>
+                <div class="story-img-container">
+                    <img src="resim1.jpg" alt="Nur Story Fotoğrafı">
+                </div>
+                <div class="story-footer">
+                    <h3>İyi Ki Doğdun! 🎉</h3>
+                    <p>04.10.2010 ✨ Bu tarihte bir güneş doğdu</p>
+                </div>
+            </div>
+            <!-- İndirme Butonu -->
+            <button class="download-btn" onclick="downloadStory()">Story Kartını İndir (PNG) 📸</button>
         </div>
     </section>
 
@@ -430,69 +505,118 @@
         </div>
     </section>
 
-    <!-- Dilek Kartları -->
-    <section id="wishes" class="wishes-section">
-        <h2>Yeni Yaş Temennileri</h2>
-        <div class="cards-grid">
-            <div class="card">
-                <h3>💜 Mutluluk</h3>
-                <p>Yüzündeki tebessümün hiç eksik olmadığı, her gününün bir öncekinden daha neşeli geçtiği bir yıl olsun.</p>
-            </div>
-            <div class="card">
-                <h3>🌟 Başarı</h3>
-                <p>Hayallerinin peşinden koşarken karşında duran tüm engellerin birer birer yok olmasını dilerim.</p>
-            </div>
-            <div class="card">
-                <h3>🔮 Huzur</h3>
-                <p>Siyahın içindeki mor ışıltı gibi; kendi özgünlüğünle parlamaya ve çevrene ışık saçmaya devam et.</p>
-            </div>
-        </div>
-    </section>
+    <!-- Gizli YouTube Player Div'i -->
+    <div id="youtubePlayer"></div>
 
-    <!-- Modal (Tam Ekran Görsel) -->
-    <div id="imageModal" class="modal">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="imgFull">
-    </div>
-
-    <!-- Footer -->
     <footer>
         <p>Nur için özenle hazırlandı ✨ Tüm hakları saklıdır.</p>
     </footer>
 
-    <!-- Javascript -->
-    <script>
-        // Sayaç Mantığı
-        const birthDate = new Date('2010-10-04T00:00:00');
+    <!-- YouTube API Kütüphanesi -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 
+    <script>
+        // MÜZİK KONFİGÜRASYONU
+        const CONFIG = {
+            youtubeVideoId: "QbIrneKxFiQ", // Verdiğin video ID
+            startTime: 0,
+            endTime: 240
+        };
+
+        const musicButton = document.getElementById("musicButton");
+        const musicText = document.getElementById("musicText");
+
+        let youtubePlayer = null;
+        let playerReady = false;
+        let isPlaying = false;
+
+        window.onYouTubeIframeAPIReady = function () {
+            youtubePlayer = new YT.Player("youtubePlayer", {
+                width: "1",
+                height: "1",
+                videoId: CONFIG.youtubeVideoId,
+                playerVars: {
+                    controls: 0,
+                    disablekb: 1,
+                    playsinline: 1,
+                    rel: 0,
+                    autoplay: 1,
+                    start: CONFIG.startTime,
+                    end: CONFIG.endTime
+                },
+                events: {
+                    onReady(event) {
+                        playerReady = true;
+                        event.target.setVolume(100);
+                        playMusic();
+                    },
+                    onStateChange(event) {
+                        if (event.data === YT.PlayerState.PLAYING) {
+                            isPlaying = true;
+                            musicText.textContent = "Nur İçin Çalıyor ♫";
+                        } else if (event.data === YT.PlayerState.PAUSED) {
+                            isPlaying = false;
+                            musicText.textContent = "Çalmak İçin Tıkla";
+                        } else if (event.data === YT.PlayerState.ENDED) {
+                            playMusic();
+                        }
+                    }
+                }
+            });
+        };
+
+        function playMusic() {
+            if (youtubePlayer && playerReady) {
+                youtubePlayer.seekTo(CONFIG.startTime, true);
+                youtubePlayer.playVideo();
+            }
+        }
+
+        setInterval(() => {
+            if (youtubePlayer && playerReady && isPlaying) {
+                const currentTime = youtubePlayer.getCurrentTime();
+                if (currentTime >= CONFIG.endTime || currentTime < CONFIG.startTime - 1) {
+                    playMusic();
+                }
+            }
+        }, 150);
+
+        // Kullanıcı sayfada herhangi bir yere tıkladığında (tarayıcı ses engeli aşma)
+        document.body.addEventListener('click', () => {
+            if (!isPlaying) playMusic();
+        }, { once: true });
+
+        musicButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isPlaying) {
+                youtubePlayer.pauseVideo();
+            } else {
+                playMusic();
+            }
+        });
+
+        // Sayaç Hesabı
+        const birthDate = new Date('2010-10-04T00:00:00');
         function updateCounter() {
             const now = new Date();
             const diff = now - birthDate;
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / 1000 / 60) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
-
-            document.getElementById('days').innerText = days;
-            document.getElementById('hours').innerText = hours;
-            document.getElementById('minutes').innerText = minutes;
-            document.getElementById('seconds').innerText = seconds;
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('minutes').innerText = Math.floor((diff / 1000 / 60) % 60);
+            document.getElementById('seconds').innerText = Math.floor((diff / 1000) % 60);
         }
-
         setInterval(updateCounter, 1000);
         updateCounter();
 
-        // Modal (Fotoğraf Büyütme) Mantığı
-        function openModal(src) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("imgFull");
-            modal.style.display = "flex";
-            modalImg.src = src;
-        }
-
-        function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
+        // Story Kartını PNG Olarak İndirme
+        function downloadStory() {
+            const storyCard = document.getElementById("storyCard");
+            html2canvas(storyCard, { scale: 2 }).then(canvas => {
+                const link = document.createElement("a");
+                link.download = "Nur_DogumGunu_Story.png";
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
         }
     </script>
 </body>
