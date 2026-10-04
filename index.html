@@ -518,11 +518,15 @@
             border-top: 1px solid rgba(157, 78, 221, 0.1);
         }
 
+        /* Gizli YouTube Player Alanı */
         #youtubePlayer {
-            position: absolute;
+            position: fixed;
             top: -9999px;
             left: -9999px;
-            visibility: hidden;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
         }
 
         @keyframes pulse {
@@ -560,7 +564,7 @@
     <!-- Müzik Kontrol Widget -->
     <div class="music-widget" id="musicButton">
         <span class="music-icon">♫</span>
-        <span id="musicText">Nur İçin Çalıyor ♫</span>
+        <span id="musicText">Çalmak İçin Tıkla</span>
     </div>
 
     <!-- Navigasyon Menüsü -->
@@ -681,13 +685,19 @@
         </div>
     </section>
 
-  <!-- YouTube API Kütüphanesi -->
+    <!-- Gizli YouTube Oynatıcı Div'i -->
+    <div id="youtubePlayer"></div>
+
+    <footer>
+        <p>Nur için özenle hazırlandı ✨ Tüm hakları saklıdır.</p>
+    </footer>
+
+    <!-- YouTube API Kütüphanesi -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
-        // MÜZİK KONFİGÜRASYONU
         const CONFIG = {
-            youtubeVideoId: "QbIrneKxFiQ", // Verdiğin video ID
+            youtubeVideoId: "QbIrneKxFiQ",
             startTime: 0,
             endTime: 240
         };
@@ -750,7 +760,7 @@
             }
         }, 150);
 
-        // Kullanıcı sayfada herhangi bir yere tıkladığında (tarayıcı ses engeli aşma)
+        // Kullanıcı sayfaya dokunduğunda müziği hemen başlat
         document.body.addEventListener('click', () => {
             if (!isPlaying) playMusic();
         }, { once: true });
