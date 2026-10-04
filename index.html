@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İyi Ki Doğdun Nur!</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-    <!-- html2canvas ve Canvas Confetti kütüphaneleri -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
@@ -121,6 +120,8 @@
 
         .hero h1 {
             font-size: 4rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
             margin-bottom: 0.5rem;
             background: linear-gradient(45deg, #fff, var(--light-purple), var(--primary-purple));
             -webkit-background-clip: text;
@@ -144,7 +145,7 @@
             animation: pulse 2s infinite;
         }
 
-        /* Hakkında ve Ana Fotoğraf */
+        /* Hakkında ve Ana Fotoğraf (resim1.jpg) */
         .about-section {
             padding: 5rem 2rem 2rem 2rem;
             max-width: 1100px;
@@ -192,7 +193,7 @@
             font-size: 1.1rem;
         }
 
-        /* Fotoğraf Galerisi */
+        /* Fotoğraf Galerisi (Özel Anılar: resim3.jpg, resim4.jpg, resim5.jpg) */
         .gallery-section {
             padding: 3rem 2rem 5rem 2rem;
             max-width: 1100px;
@@ -235,7 +236,7 @@
             font-weight: 600;
         }
 
-        /* YENİ ÖZEL 9:16 STORY KONSEPTİ */
+        /* 9:16 STORY KART BÖLÜMÜ */
         .story-section {
             padding: 5rem 1rem;
             background: radial-gradient(circle at center, #1a0f30 0%, var(--bg-color) 80%);
@@ -262,10 +263,10 @@
             gap: 2rem;
         }
 
-        /* 9:16 VIP Story Card Frame */
+        /* VIP Story Card Frame */
         .vip-story-card {
             width: 360px;
-            height: 640px; /* Exact 9:16 Ratio */
+            height: 640px;
             background: #0b0714;
             border-radius: 32px;
             border: 2px solid rgba(199, 125, 255, 0.4);
@@ -278,7 +279,6 @@
             overflow: hidden;
         }
 
-        /* Dönen Aura Arka Plan Efekti */
         .vip-story-card::before {
             content: '';
             position: absolute;
@@ -300,7 +300,7 @@
             justify-content: space-between;
         }
 
-        /* Instagram Başlık Alanı */
+        /* Instagram Üst Bar (Profil Resmi resim1.jpg) */
         .story-top-bar {
             display: flex;
             align-items: center;
@@ -337,7 +337,7 @@
             display: block;
         }
 
-        /* Fotoğraf Alanı */
+        /* Story Görsel Alanı (Story Resmi resim2.jpg) */
         .story-photo-box {
             position: relative;
             width: 100%;
@@ -366,9 +366,10 @@
         }
 
         .story-photo-overlay h4 {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
             color: #fff;
-            font-family: 'Great Vibes', cursive;
         }
 
         .story-photo-overlay p {
@@ -377,7 +378,7 @@
             margin: 0;
         }
 
-        /* Spotify Player Alt Kartı */
+        /* Spotify Player */
         .spotify-player {
             background: rgba(22, 16, 36, 0.85);
             backdrop-filter: blur(12px);
@@ -405,7 +406,6 @@
             color: var(--glow-purple);
         }
 
-        /* Equalizer Çubukları */
         .equalizer {
             display: flex;
             align-items: flex-end;
@@ -578,10 +578,10 @@
         </div>
     </section>
 
-    <!-- Hakkında ve Ana Fotoğraf -->
+    <!-- Hakkında ve Profil Resmi (resim1.jpg) -->
     <section id="about" class="about-section">
         <div class="main-photo-container">
-            <img src="resim1.jpg" alt="Nur Ana Fotoğraf">
+            <img src="resim1.jpg" alt="Nur Profil Fotoğrafı">
         </div>
         <div class="bio-container">
             <h2>İyi Ki Var Olan Biri</h2>
@@ -596,53 +596,52 @@
         </div>
     </section>
 
-    <!-- Fotoğraf Galerisi -->
+    <!-- Fotoğraf Galerisi (Özel Anılar: resim3.jpg, resim4.jpg, resim5.jpg) -->
     <section id="gallery" class="gallery-section">
-        <h2>Özel Anlar</h2>
+        <h2>Özel Anılar</h2>
         <div class="gallery-grid">
             <div class="gallery-card">
-                <img src="resim2.jpg" alt="Anı 1">
+                <img src="resim3.jpg" alt="Anı 1">
                 <div class="caption">Işıltılı Gülüşler ✨</div>
             </div>
             <div class="gallery-card">
-                <img src="resim3.jpg" alt="Anı 2">
+                <img src="resim4.jpg" alt="Anı 2">
                 <div class="caption">Unutulmaz Kareler 💜</div>
             </div>
             <div class="gallery-card">
-                <img src="resim4.jpg" alt="Anı 3">
+                <img src="resim5.jpg" alt="Anı 3">
                 <div class="caption">En Güzel Hatıralar 🌟</div>
             </div>
         </div>
     </section>
 
-    <!-- YENİ BÖLÜM: INSTAGRAM / SPOTIFY VIP STORY KART -->
+    <!-- 9:16 INSTAGRAM STORY KART BÖLÜMÜ (Profil: resim1.jpg, Story: resim2.jpg) -->
     <section id="story" class="story-section">
         <h2>Özel Instagram Story Kartı</h2>
         <p>Aşağıdaki kartı telefonuna indirerek doğrudan hikayende paylaşabilirsin!</p>
         
         <div class="story-card-wrapper">
-            <!-- İndirilecek 9:16 Canvas Kartı -->
             <div class="vip-story-card" id="vipStoryCard">
                 <div class="vip-content">
-                    <!-- Üst IG Bar -->
+                    <!-- Üst IG Bar (resim1.jpg) -->
                     <div class="story-top-bar">
-                        <img src="resim1.jpg" alt="Nur Avatar" class="story-avatar">
+                        <img src="resim1.jpg" alt="Nur Profil" class="story-avatar">
                         <div class="story-user-info">
                             <span class="story-user-name">Nur ✨</span>
                             <span class="story-badge">Doğum Günü Özel Kartı</span>
                         </div>
                     </div>
 
-                    <!-- Orta Fotoğraf Alanı -->
+                    <!-- Orta Story Görseli (resim2.jpg) -->
                     <div class="story-photo-box">
-                        <img src="resim1.jpg" alt="Nur Story Fotoğrafı">
+                        <img src="resim2.jpg" alt="Nur Story Fotoğrafı">
                         <div class="story-photo-overlay">
                             <h4>İyi Ki Doğdun Nur!</h4>
                             <p>✨ 04.10.2010 • Bu tarihte bir güneş doğdu</p>
                         </div>
                     </div>
 
-                    <!-- Alt Spotify Oynatıcı -->
+                    <!-- Alt Spotify Player -->
                     <div class="spotify-player">
                         <div class="player-track-info">
                             <div>
@@ -784,7 +783,6 @@
 
         // Story Kartı İndirme + Konfeti Patlatma
         function downloadVipStory() {
-            // Mor ve leylak konfeti efekti
             confetti({
                 particleCount: 120,
                 spread: 70,
