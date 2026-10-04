@@ -145,7 +145,7 @@
             animation: pulse 2s infinite;
         }
 
-        /* Hakkında ve Ana Fotoğraf (resim1.jpg) */
+        /* Hakkında ve Profil Resmi (resim1.jpg) */
         .about-section {
             padding: 5rem 2rem 2rem 2rem;
             max-width: 1100px;
@@ -236,7 +236,7 @@
             font-weight: 600;
         }
 
-        /* 9:16 STORY KART BÖLÜMÜ */
+        /* BÜYÜTÜLMÜŞ 9:16 STORY KART BÖLÜMÜ */
         .story-section {
             padding: 5rem 1rem;
             background: radial-gradient(circle at center, #1a0f30 0%, var(--bg-color) 80%);
@@ -265,12 +265,12 @@
 
         /* VIP Story Card Frame */
         .vip-story-card {
-            width: 360px;
-            height: 640px;
+            width: 380px;
+            height: 675px;
             background: #0b0714;
             border-radius: 32px;
             border: 2px solid rgba(199, 125, 255, 0.4);
-            padding: 1.8rem 1.4rem;
+            padding: 1.5rem 1.2rem;
             box-shadow: 0 0 50px rgba(157, 78, 221, 0.4), inset 0 0 20px rgba(157, 78, 221, 0.2);
             display: flex;
             flex-direction: column;
@@ -298,9 +298,10 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            gap: 10px;
         }
 
-        /* Instagram Üst Bar (Profil Resmi resim1.jpg) */
+        /* Instagram Üst Bar */
         .story-top-bar {
             display: flex;
             align-items: center;
@@ -337,22 +338,27 @@
             display: block;
         }
 
-        /* Story Görsel Alanı (Story Resmi resim2.jpg) */
+        /* Story Görsel Alanı */
         .story-photo-box {
             position: relative;
             width: 100%;
-            height: 310px;
+            flex-grow: 1;
+            max-height: 410px;
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(199, 125, 255, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            margin: 10px 0;
+            background-color: #050308;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .story-photo-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         .story-photo-overlay {
@@ -361,7 +367,7 @@
             left: 0;
             width: 100%;
             padding: 15px;
-            background: linear-gradient(0deg, rgba(13, 10, 18, 0.9) 0%, transparent 100%);
+            background: linear-gradient(0deg, rgba(13, 10, 18, 0.92) 0%, transparent 100%);
             text-align: left;
         }
 
@@ -383,7 +389,7 @@
             background: rgba(22, 16, 36, 0.85);
             backdrop-filter: blur(12px);
             border-radius: 18px;
-            padding: 12px 16px;
+            padding: 10px 14px;
             border: 1px solid rgba(157, 78, 221, 0.3);
             text-align: left;
         }
@@ -392,7 +398,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .track-title {
@@ -430,7 +436,7 @@
             height: 4px;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 2px;
-            margin-top: 6px;
+            margin-top: 4px;
             position: relative;
             overflow: hidden;
         }
@@ -445,7 +451,7 @@
         .story-footer-text {
             font-size: 0.75rem;
             color: #8c82a5;
-            margin-top: 8px;
+            margin-top: 6px;
             text-align: center;
         }
 
@@ -544,8 +550,8 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.8rem; }
             .nav-links { gap: 0.8rem; font-size: 0.8rem; }
-            .vip-story-card { width: 310px; height: 550px; padding: 1.2rem 1rem; }
-            .story-photo-box { height: 260px; }
+            .vip-story-card { width: 330px; height: 586px; padding: 1.2rem 1rem; }
+            .story-photo-box { max-height: 340px; }
         }
     </style>
 </head>
@@ -554,7 +560,7 @@
     <!-- Müzik Kontrol Widget -->
     <div class="music-widget" id="musicButton">
         <span class="music-icon">♫</span>
-        <span id="musicText">Müzik Yükleniyor...</span>
+        <span id="musicText">Nur İçin Çalıyor ♫</span>
     </div>
 
     <!-- Navigasyon Menüsü -->
@@ -615,7 +621,7 @@
         </div>
     </section>
 
-    <!-- 9:16 INSTAGRAM STORY KART BÖLÜMÜ (Profil: resim1.jpg, Story: resim2.jpg) -->
+    <!-- 9:16 INSTAGRAM STORY KART BÖLÜMÜ -->
     <section id="story" class="story-section">
         <h2>Özel Instagram Story Kartı</h2>
         <p>Aşağıdaki kartı telefonuna indirerek doğrudan hikayende paylaşabilirsin!</p>
@@ -623,7 +629,6 @@
         <div class="story-card-wrapper">
             <div class="vip-story-card" id="vipStoryCard">
                 <div class="vip-content">
-                    <!-- Üst IG Bar (resim1.jpg) -->
                     <div class="story-top-bar">
                         <img src="resim1.jpg" alt="Nur Profil" class="story-avatar">
                         <div class="story-user-info">
@@ -632,7 +637,6 @@
                         </div>
                     </div>
 
-                    <!-- Orta Story Görseli (resim2.jpg) -->
                     <div class="story-photo-box">
                         <img src="resim2.jpg" alt="Nur Story Fotoğrafı">
                         <div class="story-photo-overlay">
@@ -641,7 +645,6 @@
                         </div>
                     </div>
 
-                    <!-- Alt Spotify Player -->
                     <div class="spotify-player">
                         <div class="player-track-info">
                             <div>
@@ -663,7 +666,6 @@
                 </div>
             </div>
 
-            <!-- İndirme Butonu -->
             <button class="vip-download-btn" onclick="downloadVipStory()">Story Kartını İndir (HD PNG) 📸</button>
         </div>
     </section>
@@ -686,11 +688,9 @@
         <p>Nur için özenle hazırlandı ✨ Tüm hakları saklıdır.</p>
     </footer>
 
-    <!-- YouTube API Kütüphanesi -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
-        // MÜZİK KONFİGÜRASYONU
         const CONFIG = {
             youtubeVideoId: "QbIrneKxFiQ",
             startTime: 0,
@@ -781,7 +781,7 @@
         setInterval(updateCounter, 1000);
         updateCounter();
 
-        // Story Kartı İndirme + Konfeti Patlatma
+        // Story Kartı İndirme
         function downloadVipStory() {
             confetti({
                 particleCount: 120,
