@@ -681,18 +681,13 @@
         </div>
     </section>
 
-    <!-- Gizli YouTube Player Div'i -->
-    <div id="youtubePlayer"></div>
-
-    <footer>
-        <p>Nur için özenle hazırlandı ✨ Tüm hakları saklıdır.</p>
-    </footer>
-
+  <!-- YouTube API Kütüphanesi -->
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
+        // MÜZİK KONFİGÜRASYONU
         const CONFIG = {
-            youtubeVideoId: "QbIrneKxFiQ",
+            youtubeVideoId: "QbIrneKxFiQ", // Verdiğin video ID
             startTime: 0,
             endTime: 240
         };
@@ -755,6 +750,7 @@
             }
         }, 150);
 
+        // Kullanıcı sayfada herhangi bir yere tıkladığında (tarayıcı ses engeli aşma)
         document.body.addEventListener('click', () => {
             if (!isPlaying) playMusic();
         }, { once: true });
